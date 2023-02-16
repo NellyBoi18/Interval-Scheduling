@@ -9,21 +9,21 @@ struct interval {
 
 // comparator to send to qsort
 int comparator(const void* p, const void* q) {
-    int compareP = ((struct interval*)p) -> start;
-    int compareQ = ((struct interval*)q )-> start;
-    return compareP >= compareQ;
+    int compP = ((struct interval*)p) -> start;
+    int compQ = ((struct interval*)q )-> start;
+    return compP >= compQ;
 }
 
 // Determines the number of intervals scheduled
-int scheduler(struct interval arr[],int n) {
+int scheduler(struct interval arr[], int numJobs) {
     // Sorting the array based on earliest finish.
-    qsort(arr, n, sizeof(struct interval), comparator);
+    qsort(arr, numJobs, sizeof(struct interval), comparator);
 
     int i = 0;
     int j = 1;
     int count = 1;
 
-    while(i < n && j < n) {
+    while(i < numJobs && j < numJobs) {
         // If *i* end time is less than or equal to *j* start time
         if(arr[i].end <= arr[j].start) {
             // j is now the new end
