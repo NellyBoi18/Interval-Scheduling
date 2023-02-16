@@ -23,6 +23,7 @@ int scheduler(struct interval jobs[], int numJobs) {
     int j = 1;
     int count = 1;
 
+    // Going through the jobs
     while(i < numJobs && j < numJobs) {
         // If *i* end time is less than or equal to *j* start time
         if(jobs[i].end <= jobs[j].start) {
