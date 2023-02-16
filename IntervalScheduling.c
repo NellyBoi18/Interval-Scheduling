@@ -15,9 +15,9 @@ int comparator(const void* p, const void* q) {
 }
 
 // Determines the number of intervals scheduled
-int scheduler(struct interval arr[], int numJobs) {
+int scheduler(struct interval jobs[], int numJobs) {
     // Sorting the array based on earliest finish.
-    qsort(arr, numJobs, sizeof(struct interval), comparator);
+    qsort(jobs, numJobs, sizeof(struct interval), comparator);
 
     int i = 0;
     int j = 1;
@@ -25,7 +25,7 @@ int scheduler(struct interval arr[], int numJobs) {
 
     while(i < numJobs && j < numJobs) {
         // If *i* end time is less than or equal to *j* start time
-        if(arr[i].end <= arr[j].start) {
+        if(jobs[i].end <= jobs[j].start) {
             // j is now the new end
             i = j;
             // Increase intervals scheduled count
@@ -52,7 +52,7 @@ int main() {
         int numJobs;
         scanf("%d", &numJobs);
         // Creating an array of type interval to store each job's start and end time
-        struct interval arr[numJobs];
+        struct interval jobs[numJobs];
 
         // Looping through number of jobs
         for (int y = 0; y < numJobs; y++) {
@@ -63,12 +63,12 @@ int main() {
             scanf("%d",&endTime);
 
             // Storing start/end times in interval struct in array
-            arr[y].start = startTime;
-            arr[y].end = endTime;
+            jobs[y].start = startTime;
+            jobs[y].end = endTime;
         }
 
         // Calculating interval scheduling
-        int result = scheduler(arr, numJobs);
+        int result = scheduler(jobs, numJobs);
 
         // Storing result in array to print after
         instanceIntervals[x] = result;
